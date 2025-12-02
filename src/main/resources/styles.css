@@ -1,0 +1,223 @@
+/* Основные стили приложения */
+
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* Цветовая палитра */
+.dark-primary {
+    -fx-background-color: #2b2b2b;
+}
+
+.dark-secondary {
+    -fx-background-color: #1e1e1e;
+}
+
+.dark-accent {
+    -fx-background-color: #3c3c3c;
+}
+
+/* Текстовые стили */
+.title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: #aaa;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.label.info {
+    -fx-text-fill: #2196F3;
+}
+
+.label.success {
+    -fx-text-fill: #4CAF50;
+}
+
+.label.warning {
+    -fx-text-fill: #FF9800;
+}
+
+.label.error {
+    -fx-text-fill: #F44336;
+}
+
+/* Кнопки */
+.button {
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 2, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 2);
+}
+
+.button:pressed {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 1, 0, 0, 0);
+}
+
+.button-primary {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.button-primary:hover {
+    -fx-background-color: #45a049;
+}
+
+.button-secondary {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #0b7dda;
+}
+
+.button-danger {
+    -fx-background-color: #F44336;
+    -fx-text-fill: white;
+}
+
+.button-danger:hover {
+    -fx-background-color: #d32f2f;
+}
+
+/* Текстовые поля */
+.text-field, .password-field, .text-area {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: white;
+    -fx-border-color: #555;
+    -fx-border-radius: 4px;
+    -fx-padding: 6px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #2196F3;
+}
+
+.text-area .content {
+    -fx-background-color: #2b2b2b;
+}
+
+/* Слайдеры */
+.slider .track {
+    -fx-background-color: #555;
+}
+
+.slider .thumb {
+    -fx-background-color: #2196F3;
+}
+
+.slider .axis {
+    -fx-tick-label-fill: white;
+}
+
+/* Панели и контейнеры */
+.panel {
+    -fx-background-color: #2b2b2b;
+    -fx-background-radius: 8px;
+    -fx-border-color: #3c3c3c;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.status-panel {
+    -fx-background-color: #1e1e1e;
+    -fx-padding: 10px;
+    -fx-border-color: #3c3c3c;
+    -fx-border-width: 1px 0 0 0;
+}
+
+/* Изображения */
+.image-container {
+    -fx-background-color: #1a1a1a;
+    -fx-border-color: #333;
+    -fx-border-width: 1px;
+}
+
+/* Таблицы */
+.table-view {
+    -fx-background-color: #2b2b2b;
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #252525;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+/* Вкладки */
+.tab-pane {
+    -fx-background-color: #2b2b2b;
+}
+
+.tab {
+    -fx-background-color: #3c3c3c;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-padding: 8px 16px;
+}
+
+.tab:selected {
+    -fx-background-color: #2196F3;
+}
+
+.tab-label {
+    -fx-text-fill: white;
+}
+
+/* Списки */
+.list-view {
+    -fx-background-color: #2b2b2b;
+    -fx-border-color: #3c3c3c;
+}
+
+.list-cell {
+    -fx-background-color: #2b2b2b;
+    -fx-text-fill: white;
+}
+
+.list-cell:odd {
+    -fx-background-color: #252525;
+}
+
+.list-cell:selected {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+/* Комбо
