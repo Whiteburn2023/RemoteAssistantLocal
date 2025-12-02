@@ -1,0 +1,77 @@
+text
+[Помощник (JavaFX)] ←--- LAN ---→ [Пользователь (Агент)]
+
+text
+RemoteAssistantLocal/
+├── src/main/java/com/remoteassistant/
+│   ├── common/
+│   │   ├── Protocol.java          # Протокол сообщений
+│   │   ├── Command.java           # Команды
+│   │   └── ImageUtils.java        # Утилиты для работы с изображениями
+│   ├── agent/
+│   │   ├── DesktopAgent.java      # Агент на компьютере пользователя
+│   │   └── AgentApp.java          # Запуск агента
+│   ├── viewer/
+│   │   ├── ViewerApp.java         # JavaFX приложение
+│   │   ├── ViewerController.java  # Контроллер FXML
+│   │   ├── ConnectionManager.java # Управление соединением
+│   │   └── MouseHandler.java      # Обработка мыши
+│   └── Main.java                  # Точка входа
+├── src/main/resources/
+│   ├── viewer.fxml                # Интерфейс помощника
+│   ├── agent.fxml                 # Интерфейс агента (опционально)
+│   └── styles.css                 # Стили
+└── pom.xml
+
+
+Файл сборки (pom.xml)
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.remoteassistant</groupId>
+    <artifactId>RemoteAssistantLocal</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <javafx.version>17.0.2</javafx.version>
+    </properties>
+
+    <dependencies>
+        <!-- JavaFX -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.remoteassistant.viewer.ViewerApp</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

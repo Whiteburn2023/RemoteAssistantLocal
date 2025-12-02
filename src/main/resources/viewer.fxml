@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.remoteassistant.viewer.ViewerController"
+      spacing="10"
+      style="-fx-padding: 10; -fx-background-color: #2b2b2b;">
+
+    <!-- Панель подключения -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="IP адрес агента:" style="-fx-text-fill: white;"/>
+        <TextField fx:id="ipField" prefWidth="200"/>
+        <Button fx:id="connectButton" text="Подключиться"
+                onAction="#handleConnect"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Separator orientation="VERTICAL"/>
+        <Label text="Качество:" style="-fx-text-fill: white;"/>
+        <Slider fx:id="qualitySlider" min="10" max="100" value="70"
+                prefWidth="150"
+                onMouseReleased="#handleQualityChange"/>
+        <Label fx:id="fpsLabel" text="FPS: 0"
+               style="-fx-text-fill: #4CAF50; -fx-font-weight: bold;"/>
+        <Button text="Скриншот" onAction="#takeScreenshot"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+    </HBox>
+
+    <!-- Область отображения рабочего стола -->
+    <BorderPane VBox.vgrow="ALWAYS">
+        <center>
+            <ScrollPane fitToWidth="true" fitToHeight="true"
+                        style="-fx-background: #1e1e1e;">
+                <ImageView fx:id="desktopView"
+                           preserveRatio="true"
+                           pickOnBounds="true"
+                           focusTraversable="true"/>
+            </ScrollPane>
+        </center>
+
+        <!-- Наложение при отключении -->
+        <Pane fx:id="overlayPane"
+              style="-fx-background-color: rgba(0,0,0,0.7);">
+            <VBox alignment="CENTER" spacing="20">
+                <Label text="Не подключено"
+                       style="-fx-text-fill: white; -fx-font-size: 24;"/>
+                <Label text="Для подключения введите IP адрес агента и нажмите 'Подключиться'"
+                       style="-fx-text-fill: #aaa;"/>
+            </VBox>
+        </Pane>
+    </BorderPane>
+
+    <!-- Статус бар -->
+    <HBox spacing="10">
+        <Label fx:id="statusLabel" text="Не подключено"
+               style="-fx-text-fill: #ff9800; -fx-font-weight: bold;"/>
+        <Separator orientation="VERTICAL"/>
+        <Label text="Использование:" style="-fx-text-fill: #aaa;"/>
+        <Label text="• Кликните на изображении для эмуляции мыши"
+               style="-fx-text-fill: #aaa;"/>
+        <Label text="• Перемещайте мышь для эмуляции движения"
+               style="-fx-text-fill: #aaa;"/>
+    </HBox>
+
+</VBox>
