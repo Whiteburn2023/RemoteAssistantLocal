@@ -44,10 +44,15 @@ public class DesktopAgent {
 
     private void handleClient(Socket socket) {
         try (
-                DataInputStream in = new DataInputStream(socket.getInputStream());
-                DataOutputStream out = new DataOutputStream(socket.getOutputStream())
+            DataInputStream in = new DataInputStream(socket.getInputStream());
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream())
         ) {
-            // Поток отправки скриншотов
+            // ФИКСИРОВАННЫЙ размер 1920x1080
+            final int FIXED_WIDTH = 1920;
+            final int FIXED_HEIGHT = 1080;
+
+            System.out.println("Работа в фиксированном разрешении: " + FIXED_WIDTH + "x" + FIXED_HEIGHT);
+
             Thread screenshotThread = new Thread(() -> {
                 try {
                     while (!socket.isClosed()) {
@@ -55,8 +60,10 @@ public class DesktopAgent {
                         Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
                         BufferedImage screenshot = robot.createScreenCapture(screenRect);
 
-                        // Уменьшаем размер для локальной сети
-                        BufferedImage scaled = ImageUtils.scaleImage(screenshot, 1600);
+                        BufferedImage scaled = new BufferedImage(FIXED_WIDTH, FIXED_HEIGHT, BufferedImage.TYPE_INT_RGB);
+                        Graphics2D g2d = scaled.createGraphics();
+                        g2d.drawImage(screenshot, 0, 0, FIXED_WIDTH, FIXED_HEIGHT, null);
+                        g2d.dispose();
 
                         // Конвертируем в байты
                         byte[] imageData = ImageUtils.imageToBytes(scaled, quality / 100f);

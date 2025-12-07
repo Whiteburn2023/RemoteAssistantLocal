@@ -47,6 +47,9 @@ public class ViewerController implements Initializable {
     private double scaleX = 1.0;
     private double scaleY = 1.0;
 
+    private final int FIXED_WIDTH = 1920;
+    private final int FIXED_HEIGHT = 1080;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Устанавливаем обработчики событий мыши на ImageView
@@ -133,31 +136,26 @@ public class ViewerController implements Initializable {
         receiveThread = new Thread(() -> {
             try {
                 while (connected && !socket.isClosed()) {
-                    // Читаем размер изображения
                     int size = in.readInt();
                     if (size <= 0) continue;
 
-                    // Читаем данные изображения
                     byte[] imageData = new byte[size];
                     in.readFully(imageData);
 
-                    // Создаем изображение из байтов
                     Image image = new Image(new ByteArrayInputStream(imageData));
 
-                    // Обновляем ImageView в UI потоке
                     Platform.runLater(() -> {
                         desktopView.setImage(image);
                         frameCount++;
 
-                        // Рассчитываем масштаб для преобразования координат мыши
-                        if (image.getWidth() > 0 && desktopView.getFitWidth() > 0) {
-                            scaleX = image.getWidth() / desktopView.getFitWidth();
-                            scaleY = image.getHeight() / desktopView.getFitHeight();
-                        }
+                        // УСТАНАВЛИВАЕМ ФИКСИРОВАННЫЙ РАЗМЕР
+                        desktopView.setFitWidth(FIXED_WIDTH);
+                        desktopView.setFitHeight(FIXED_HEIGHT);
+                        desktopView.setPreserveRatio(false);
                     });
                 }
             } catch (Exception e) {
-                if (connected) { // Если не было планового отключения
+                if (connected) {
                     Platform.runLater(() -> {
                         statusLabel.setText("Соединение разорвано");
                         showError("Потеряно соединение с агентом");
@@ -170,36 +168,39 @@ public class ViewerController implements Initializable {
     }
 
     private void setupMouseHandlers() {
-        // Движение мыши
         desktopView.setOnMouseMoved(event -> {
             if (!connected) return;
 
-            int x = (int)(event.getX() * scaleX);
-            int y = (int)(event.getY() * scaleY);
+            // Просто ограничиваем координаты 1920x1080
+            int x = (int) Math.max(0, Math.min(event.getX(), FIXED_WIDTH - 1));
+            int y = (int) Math.max(0, Math.min(event.getY(), FIXED_HEIGHT - 1));
 
             sendCommand(Protocol.CMD_MOUSE_MOVE + ":" + x + "," + y);
         });
 
-        // Клики мыши
+        // Клики мыши - БЕЗ масштабирования
         desktopView.setOnMouseClicked(event -> {
             if (!connected) return;
 
-            int x = (int)(event.getX() * scaleX);
-            int y = (int)(event.getY() * scaleY);
+            int x = (int) Math.max(0, Math.min(event.getX(), FIXED_WIDTH - 1));
+            int y = (int) Math.max(0, Math.min(event.getY(), FIXED_HEIGHT - 1));
             int button = getMouseButtonCode(event.getButton());
 
             sendCommand(Protocol.CMD_MOUSE_MOVE + ":" + x + "," + y);
             sendCommand(Protocol.CMD_MOUSE_CLICK + ":" + button);
         });
 
-        // Обработка клавиш (для передачи комбинаций)
-        desktopView.setOnKeyPressed(event -> {
+        // Перетаскивание
+        desktopView.setOnMouseDragged(event -> {
             if (!connected) return;
 
-            // Можно передавать нажатия клавиш
-            // sendCommand(Protocol.CMD_KEY_PRESS + ":" + event.getCode().getCode());
+            int x = (int) Math.max(0, Math.min(event.getX(), FIXED_WIDTH - 1));
+            int y = (int) Math.max(0, Math.min(event.getY(), FIXED_HEIGHT - 1));
+
+            sendCommand(Protocol.CMD_MOUSE_MOVE + ":" + x + "," + y);
         });
     }
+
 
     private int getMouseButtonCode(MouseButton button) {
         switch (button) {

@@ -32,9 +32,11 @@
     <BorderPane VBox.vgrow="ALWAYS">
         <center>
             <ScrollPane fitToWidth="true" fitToHeight="true"
-                        style="-fx-background: #1e1e1e;">
+                        style="-fx-background: #1e1e1e;"
+                        prefViewportWidth="1920" prefViewportHeight="1080">
                 <ImageView fx:id="desktopView"
-                           preserveRatio="true"
+                           fitWidth="1920"
+                           fitHeight="1080"
                            pickOnBounds="true"
                            focusTraversable="true"/>
             </ScrollPane>

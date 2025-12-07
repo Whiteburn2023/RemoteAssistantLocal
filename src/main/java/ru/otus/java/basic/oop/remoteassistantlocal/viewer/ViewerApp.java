@@ -16,14 +16,14 @@ public class ViewerApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // ИСПРАВЛЕННЫЙ ПУТЬ:
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/ru/otus/java/basic/oop/remoteassistantlocal/viewer.fxml")
         );
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 1200, 800);
-        primaryStage.setTitle("Remote Assistant - Viewer");
+        // Устанавливаем размер окна под 1920x1080 + панели управления
+        Scene scene = new Scene(root, 2000, 1200); // Чуть больше для полос прокрутки/панелей
+        primaryStage.setTitle("Remote Assistant - Viewer (1920x1080)");
         primaryStage.setScene(scene);
         primaryStage.show();
 
