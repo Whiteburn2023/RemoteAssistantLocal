@@ -4,18 +4,27 @@ package ru.otus.java.basic.oop.remoteassistantlocal.viewer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.Pane;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
+
+import java.awt.event.InputEvent;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.*;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import ru.otus.java.basic.oop.remoteassistantlocal.common.Protocol;
+
+import javax.imageio.ImageIO;
 
 public class ViewerController implements Initializable {
 

@@ -1,6 +1,6 @@
 package ru.otus.java.basic.oop.remoteassistantlocal.viewer;
 
-import com.remoteassistant.common.Command;
+import ru.otus.java.basic.oop.remoteassistantlocal.common.Command;
 import javafx.application.Platform;
 import java.io.*;
 import java.net.Socket;

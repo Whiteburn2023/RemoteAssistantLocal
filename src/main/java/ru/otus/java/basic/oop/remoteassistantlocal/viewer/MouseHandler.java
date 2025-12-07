@@ -1,9 +1,10 @@
 package ru.otus.java.basic.oop.remoteassistantlocal.viewer;
 
-import com.remoteassistant.common.Command;
+import ru.otus.java.basic.oop.remoteassistantlocal.common.Command;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;  // Добавляем импорт для ScrollEvent
 import java.awt.event.InputEvent;
 
 /**
@@ -38,7 +39,7 @@ public class MouseHandler {
         desktopView.setOnMouseDragged(this::handleMouseDragged);
         desktopView.setOnMouseClicked(this::handleMouseClicked);
         desktopView.setOnMouseExited(this::handleMouseExited);
-        desktopView.setOnScroll(this::handleMouseScroll);
+        desktopView.setOnScroll(this::handleMouseScroll);  // Теперь должно работать
 
         desktopView.setFocusTraversable(true);
     }
@@ -64,10 +65,7 @@ public class MouseHandler {
     /**
      * Преобразование координат мыши в координаты экрана
      */
-    private Command.Point convertCoordinates(MouseEvent event) {
-        double viewX = event.getX();
-        double viewY = event.getY();
-
+    private Command.Point convertCoordinates(double viewX, double viewY) {
         // Учитываем смещение для центрированного изображения
         double adjustedX = viewX - offsetX;
         double adjustedY = viewY - offsetY;
@@ -84,6 +82,20 @@ public class MouseHandler {
         lastY = screenY;
 
         return new Command.Point(screenX, screenY);
+    }
+
+    /**
+     * Преобразование координат из MouseEvent
+     */
+    private Command.Point convertCoordinates(MouseEvent event) {
+        return convertCoordinates(event.getX(), event.getY());
+    }
+
+    /**
+     * Преобразование координат из ScrollEvent
+     */
+    private Command.Point convertCoordinates(ScrollEvent event) {
+        return convertCoordinates(event.getX(), event.getY());
     }
 
     /**
@@ -185,11 +197,12 @@ public class MouseHandler {
     /**
      * Обработка прокрутки колесика мыши
      */
-    private void handleMouseScroll(MouseEvent event) {
+    private void handleMouseScroll(ScrollEvent event) {  // Изменяем параметр на ScrollEvent
         if (!connectionManager.isConnected()) return;
 
         Command.Point point = convertCoordinates(event);
-        int scrollAmount = (int) event.getDeltaY();
+        double deltaY = event.getDeltaY();  // Используем getDeltaY() вместо getY()
+        int scrollAmount = (int) deltaY;
 
         Command command = new Command(Command.Type.MOUSE_WHEEL,
                 new Object[]{point.x, point.y, scrollAmount});

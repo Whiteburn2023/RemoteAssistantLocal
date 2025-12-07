@@ -1,7 +1,7 @@
 package ru.otus.java.basic.oop.remoteassistantlocal;
 
-import com.remoteassistant.agent.AgentApp;
-import com.remoteassistant.viewer.ViewerApp;
+import ru.otus.java.basic.oop.remoteassistantlocal.agent.AgentApp;
+import ru.otus.java.basic.oop.remoteassistantlocal.viewer.ViewerApp;
 import javafx.application.Application;
 
 /**

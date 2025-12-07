@@ -1,8 +1,12 @@
 package ru.otus.java.basic.oop.remoteassistantlocal.agent;
 // DesktopAgent.java
+import ru.otus.java.basic.oop.remoteassistantlocal.common.ImageUtils;
+import ru.otus.java.basic.oop.remoteassistantlocal.common.Protocol;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 

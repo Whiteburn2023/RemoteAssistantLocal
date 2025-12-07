@@ -1,6 +1,7 @@
 package ru.otus.java.basic.oop.remoteassistantlocal.viewer;
 
 // ViewerApp.java
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,13 +10,19 @@ import javafx.stage.Stage;
 
 public class ViewerApp extends Application {
 
+    public ViewerApp() {
+        System.out.println("Конструктор ViewerApp вызван");
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/viewer.fxml"));
+        // ИСПРАВЛЕННЫЙ ПУТЬ:
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/ru/otus/java/basic/oop/remoteassistantlocal/viewer.fxml")
+        );
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 1200, 800);
-
         primaryStage.setTitle("Remote Assistant - Viewer");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -28,7 +35,13 @@ public class ViewerApp extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        System.out.println("Запуск приложения Viewer...");
+        try {
+            launch(args);
+        } catch (Exception e) {
+            System.err.println("Фатальная ошибка: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
 

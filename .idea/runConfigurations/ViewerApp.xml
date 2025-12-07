@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ViewerApp" type="Application" factoryName="Application">
+    <envs>
+      <env name="RemoteAssistantLocal" value="" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="ru.otus.java.basic.oop.remoteassistantlocal.viewer.ViewerApp" />
+    <module name="RemoteAssistantLocal" />
+    <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\javafx-sdk-17.0.17\lib&quot; --add-modules javafx.controls,javafx.fxml,javafx.swing" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
